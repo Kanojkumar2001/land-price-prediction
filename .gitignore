@@ -55,7 +55,6 @@ coverage/
 # Keep important files
 !backend/
 !backend/*.py
-!backend/*.csv
 !backend/*.json
 !backend/requirements.txt
 !backend/README.md
@@ -67,3 +66,7 @@ coverage/
 !api/*.json
 !pyproject.toml
 !requirements.txt
+
+# Exclude large files
+!backend/*.csv
+backend/*.csv

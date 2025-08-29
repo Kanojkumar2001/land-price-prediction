@@ -4,7 +4,7 @@ import json
 import os
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_cors import CORS
-from main import predict_price, get_locations
+from main_light import predict_price, get_locations
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
