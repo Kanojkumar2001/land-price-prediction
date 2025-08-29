@@ -10,3 +10,6 @@ if __name__ == "__main__":
 
 # Export the Flask app for Vercel
 app.debug = False
+
+# Vercel requires this specific export
+app = app
