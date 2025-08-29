@@ -65,6 +65,10 @@ coverage/
 !api/*.py
 !api/*.json
 !requirements.txt
+!package.json
+!vite.config.js
+!src/
+!public/
 
 # Exclude large files and ML dependencies
 backend/*.csv
@@ -74,3 +78,5 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+node_modules/
+dist/
