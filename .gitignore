@@ -64,9 +64,13 @@ coverage/
 !api/
 !api/*.py
 !api/*.json
-!pyproject.toml
 !requirements.txt
 
-# Exclude large files
-!backend/*.csv
+# Exclude large files and ML dependencies
 backend/*.csv
+backend/*.pkl
+backend/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
