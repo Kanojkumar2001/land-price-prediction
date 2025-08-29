@@ -1,4 +1,5 @@
 {
+  "name": "land-price-prediction-app",
   "version": 2,
   "builds": [
     {

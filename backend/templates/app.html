@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/app.css') }}">
+  <title>Land Price Prediction</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const locations = {{ locations|tojson if locations is defined else '[]' }};
+      const selectElement = document.getElementById('location');
+      if (selectElement && locations && Array.isArray(locations)) {
+        locations.forEach(function (loc) {
+          var opt = document.createElement('option');
+          opt.value = loc; opt.textContent = loc; selectElement.appendChild(opt);
+        });
+      }
+    });
+  </script>
+  <script>
+    function doPredict(event) {
+      const form = document.getElementById('prediction-form');
+      if (!form) return;
+      if (event && event.preventDefault) event.preventDefault();
+      const data = {
+        location: document.getElementById('location').value,
+        square_feet: document.getElementById('square-feet').value,
+        bedrooms: document.getElementById('bedrooms').value,
+        bathrooms: document.getElementById('bathrooms').value
+      };
+      fetch('{{ url_for('api_predict') }}', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(r => r.json()).then(resp => {
+        if (resp.error) {
+          document.getElementById('predicted_price').textContent = 'Error: ' + resp.error;
+        } else {
+          document.getElementById('predicted_price').textContent = 'Predicted Price in Lakhs: ' + resp.predicted_price_lakhs;
+        }
+      }).catch(() => {
+        document.getElementById('predicted_price').textContent = 'Error predicting price';
+      });
+    }
+  </script>
+</head>
+<body class="dark-mode">
+  <nav class="navbar">
+    <div class="navbar-brand">Land Price Prediction</div>
+    <div class="navbar-user">
+      <a class="btn-secondary" href="http://localhost:5173/">Home</a>
+      <a class="btn-secondary" href="{{ url_for('form') }}">Price</a>
+    </div>
+  </nav>
+  <div class="container">
+    <header>
+      <h1>Predict Bengaluru Property Prices</h1>
+      <p>Provide property details to estimate the price (in Lakhs).</p>
+    </header>
+    <main>
+      <form id="prediction-form" class="form-grid" onsubmit="doPredict(event)">
+        <label for="location">Property Location</label>
+        <select id="location" name="location" required></select>
+
+        <label for="square-feet">Square Feet</label>
+        <input type="number" id="square-feet" name="square_feet" min="200" step="1" required>
+
+        <label for="bedrooms">Bedrooms (BHK)</label>
+        <input type="number" id="bedrooms" name="bedrooms" min="1" step="1" required>
+
+        <label for="bathrooms">Bathrooms</label>
+        <input type="number" id="bathrooms" name="bathrooms" min="1" step="1" required>
+
+        <button type="submit" class="cta">Predict Price</button>
+      </form>
+
+      <div id="output" class="output-section">
+        <h2>Property Price Prediction</h2>
+        <p id="predicted_price">{{ predicted_price }}</p>
+      </div>
+    </main>
+  
+  </div>
+</body>
+</html>
