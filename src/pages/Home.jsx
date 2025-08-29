@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import PredictionForm from '../components/PredictionForm';
 
 const Home = () => {
   return (
@@ -18,7 +19,7 @@ const Home = () => {
               </p>
               <div className="hero-buttons">
                 <a href="#features" className="btn btn-primary">Explore Features</a>
-                <a href="http://127.0.0.1:5000/predict" className="btn btn-secondary">Try Prediction</a>
+                <a href="#prediction-form" className="btn btn-secondary">Try Prediction</a>
               </div>
             </div>
             <div className="hero-image">
@@ -116,6 +117,13 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Prediction Form Section */}
+      <section id="prediction-form" className="prediction-form-section">
+        <div className="container">
+          <PredictionForm />
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="cta">
         <div className="container">
@@ -126,7 +134,7 @@ const Home = () => {
             </p>
             <div className="cta-buttons">
               <a href="/cities" className="btn btn-primary">Explore Cities</a>
-              <a href="http://127.0.0.1:5000/predict" className="btn btn-secondary">Try Prediction</a>
+              <a href="#prediction-form" className="btn btn-secondary">Try Prediction</a>
             </div>
           </div>
         </div>
