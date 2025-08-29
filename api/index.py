@@ -1,5 +1,9 @@
 from backend.app import app
 
-# This is the entry point for Vercel serverless functions
+# Vercel serverless function handler
+def handler(request, context):
+    return app(request, context)
+
+# For local development
 if __name__ == "__main__":
     app.run()
