@@ -64,5 +64,6 @@ coverage/
 !backend/templates/
 !api/
 !api/*.py
+!api/*.json
 !pyproject.toml
 !requirements.txt
